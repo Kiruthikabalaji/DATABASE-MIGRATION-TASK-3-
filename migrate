@@ -1,0 +1,60 @@
+1.Tools & Technologies Used:
+
+MySQL 8.0
+
+PostgreSQL 15
+
+pgAdmin 4
+
+pgloader (automated migration tool)
+
+SQL scripts for manual validation
+
+Command-line interface (Terminal/Command Prompt)
+
+Migration Process:
+
+1.Analyzed MySQL Source Database
+
+Tables: employees, departments, projects
+
+Noted datatypes, primary/foreign keys, and constraints.
+
+2.Schema Conversion
+
+Mapped MySQL datatypes to PostgreSQL:
+
+INT → INTEGER
+
+VARCHAR(n) → VARCHAR(n)
+
+DATETIME → TIMESTAMP
+
+TINYINT(1) → BOOLEAN
+
+Recreated schema in PostgreSQL using CREATE TABLE statements.
+
+3.Data Migration
+
+Used pgloader to transfer data automatically:
+
+pgloader mysql://root:password@localhost/mydb \
+        postgresql://postgres:password@localhost/mydb
+
+4.Data Integrity Checks
+
+Row counts matched for all tables.
+
+Randomly queried records for accuracy.
+
+All primary and foreign key relationships were preserved.
+
+5.Challenges Faced & Solutions
+
+Issue: MySQL ENUM type not supported in PostgreSQL
+Solution: Converted to TEXT with CHECK constraint manually.
+
+Issue: Date formatting inconsistencies
+Solution: Used PostgreSQL’s TO_TIMESTAMP() for parsing.
+
+
